@@ -1,4 +1,5 @@
-<<?php
+<?php
+    require_once "src/Category.php";
     class Task
     {
         private $name;
@@ -35,6 +36,40 @@
             $GLOBALS['DB']->exec("INSERT INTO tasks (name) VALUES ('{$this->getName()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
+
+        function addCategory($cat_to_add)
+        {
+            $cat_id = $cat_to_add->getId();
+            $GLOBALS['DB']->exec("INSERT INTO categories_tasks (task_id, category_id) VALUES ({$this->getId()}, {$cat_id});");
+        }
+
+        function getCategories()
+        {
+            $query = $GLOBALS['DB']->query("SELECT category_id FROM categories_tasks WHERE task_id = {$this->getId()};");
+            //var_dump($query);
+            $category_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+            //var_dump($category_ids);
+
+            $categories = array();
+            foreach($category_ids as $id) {
+                $category_id = $id['category_id'];
+                $result = $GLOBALS['DB']->query("SELECT * FROM categories WHERE id = {$category_id};");
+                $returned_category = $result->fetchAll(PDO::FETCH_ASSOC);
+
+                $name = $returned_category[0]['name'];
+                $id = $returned_category[0]['id'];
+                $new_category = new Category($name, $id);
+                array_push($categories, $new_category);
+            }
+            return $categories;
+        }
+        // delete task from tasks table and categories_tasks table
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM tasks WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM categories_tasks WHERE task_id = {$this->getId()};");
+        }
+
         //get all tasks independent of category
         static function getAll()
         {
@@ -45,7 +80,6 @@
                 $name = $task['name'];
                 $id = $task['id'];
                 $new_task = new Task($name, $id);
-                var_dump($new_task);
                 array_push($tasks, $new_task);
             }
             return $tasks;
