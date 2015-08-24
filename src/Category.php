@@ -1,8 +1,8 @@
 <<?php
     class Category
     {
-        private name;
-        private id;
+        private $name;
+        private $id;
 
         function __construct($name, $id = null)
         {
