@@ -59,6 +59,12 @@
             $task_id = $task_to_add->getId();
             $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$this->getId()}, {$task_id});");
         }
+        
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE categories SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
 
         function delete()
         {

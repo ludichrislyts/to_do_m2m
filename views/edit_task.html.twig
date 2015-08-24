@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link href="../../css/custom.css" rel='stylesheet' type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title>Update Category</title>
+    </head>
+    <body>
+        <div class="container">
+
+            <h3>Update "{{ task.getName }}" details </h3>
+            <form action="/task/{{ task.getId }}" method="post">
+                <input name="_method" type="hidden" value="patch">
+                <label for="name">Rename your task:</label>
+                <input id="name" name="name" type="text">
+                <button name="submit">Update</button>
+            </form>
+
+            <form action="/task/{{ task.getId }}/update" method="post">
+                <input name="_method" type="hidden" value="patch">
+                <label for="cat">Move this task to a different category</label>
+                <input id="cat" name="cat" type="text">
+                <button name="submit">Update</button>
+            </form>
+
+            <h3>Or maybe you're done with this task?</h3>
+            <form action="/task/{{ task.getId }}" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit">Yeah, I finished it off!'</button>
+            </form>
+
+            <a href="/">No! Take me to my home page</a>
+        </div>
+    </body>
+</html>

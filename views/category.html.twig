@@ -22,7 +22,7 @@
                     {% endif %}
 
                 <h3>Add more tasks in {{ category.getName }}:</h3>
-                <form action="/category_tasks" method="post">
+                <form action="/task_insert" method="post">
                     <input type="hidden" name="category_id" id="category_id" value="{{ category.getId() }}">
                     <label for='name'>Task Name</label>
                     <input id='name' name='name' type='text'>

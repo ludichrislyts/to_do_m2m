@@ -62,6 +62,12 @@
             }
             return $categories;
         }
+        
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE tasks SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setDescription($new_name);
+        }
         // delete task from tasks table and categories_tasks table
         function delete()
         {
