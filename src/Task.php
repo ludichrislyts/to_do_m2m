@@ -51,6 +51,21 @@
             return $tasks;
         }
 
+        static function findId($id)
+        {
+            $found_task = null;
+            $tasks_to_search = Task::getAll();
+            foreach ($tasks_to_search as $task)
+            {
+                $task_id = $task->getId();
+                if ($task_id === $id)
+                {
+                    $found_task = $task;
+                }
+            }
+            return $found_task;
+        }
+
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM tasks;");
