@@ -53,17 +53,31 @@
             }
             return $tasks;
         }
+
+        function addTask($task_to_add)
+        {
+            $task_id = $task_to_add->getId();
+            $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$this->getId()}, {$task_id});");
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM categories_tasks WHERE category_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
+        }
+
+
         //get all categorys independent of category
         static function getAll()
         {
             $returned_categories = $GLOBALS['DB']->query("SELECT * FROM categories");
-            $categorys = array();
+            $categories = array();
             foreach($returned_categories as $category)
             {
                 $name = $category['name'];
                 $id = $category['id'];
                 $new_category = new category($name, $id);
-                var_dump($new_category);
+                //var_dump($new_category);
                 array_push($categories, $new_category);
             }
             return $categories;

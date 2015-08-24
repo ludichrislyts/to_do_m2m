@@ -39,8 +39,8 @@
 
         function addCategory($cat_to_add)
         {
-            $cat_id = $cat_to_add->getId();
-            $GLOBALS['DB']->exec("INSERT INTO categories_tasks (task_id, category_id) VALUES ({$this->getId()}, {$cat_id});");
+            //$cat_id = $cat_to_add->getId();
+            $GLOBALS['DB']->exec("INSERT INTO categories_tasks (task_id, category_id) VALUES ({$this->getId()}, {$cat_to_add->getId()});");
         }
 
         function getCategories()
@@ -66,8 +66,8 @@
         // delete task from tasks table and categories_tasks table
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM tasks WHERE id = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM categories_tasks WHERE task_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM tasks WHERE id = {$this->getId()};");
         }
 
         //get all tasks independent of category

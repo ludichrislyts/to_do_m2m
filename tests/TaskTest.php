@@ -14,12 +14,13 @@
         protected function tearDown()
         {
             Task::deleteAll();
+            Category::deleteAll();
         }
 
         function test_save()
         {
             //Arrange
-            $name = "Wash stuff";
+            $name = "Save";
             $task = new Task($name);
 
             //Act
@@ -33,8 +34,8 @@
         function test_deleteAll()
         {
             //Arrange
-            $name1 = "Wash stuff";
-            $name2 = "Clean stuff";
+            $name1 = "DeleteAll";
+            $name2 = "More deleteAll";
             $task1 = new Task($name1);
             $task1->save();
             $task2 = new Task($name2);
@@ -51,8 +52,8 @@
         function test_findId()
         {
             //Arrange
-            $name1 = "Wash stuff";
-            $name2 = "Clean stuff";
+            $name1 = "Find Id";
+            $name2 = "More findId";
             $task1 = new Task($name1);
             $task1->save();
             $task2 = new Task($name2);
@@ -70,11 +71,11 @@
         function test_addCategory()
         {
             //Arrange
-            $cat_name = "Work Stuff";
+            $cat_name = "add Category in Tasktest Stuff";
             $test_category = new Category($cat_name);
             $test_category->save();
 
-            $task_name = "program stuff";
+            $task_name = "add category in tasktest";
             $test_task = new Task($task_name);
             $test_task->save();
 
@@ -88,15 +89,15 @@
         function test_getCategories()
         {
             //Arrange
-            $cat_name1 = "Work Stuff";
+            $cat_name1 = "get categorries stuff";
             $test_category1 = new Category($cat_name1);
             $test_category1->save();
 
-            $cat_name2 = "Home Stuff";
+            $cat_name2 = "more get categorries stuff";
             $test_category2 = new Category($cat_name2);
             $test_category2->save();
 
-            $task_name = "program stuff";
+            $task_name = "getCategories";
             $test_task = new Task($task_name);
             $test_task->save();
 
@@ -111,11 +112,11 @@
         function test_delete()
         {
             //Arrange
-            $cat_name = "Work stuff";
+            $cat_name = "tasktest delete stuff";
             $test_category = new Category($cat_name);
             $test_category->save();
 
-            $task_name = "File reports";
+            $task_name = "tasktest delete";
             $test_task = new Task($task_name);
             $test_task->save();
 

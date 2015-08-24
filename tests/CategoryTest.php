@@ -4,6 +4,7 @@
     * @backupStaticAttributes disabled
     */
     require_once "src/Category.php";
+    require_once "src/Task.php";
     $server = 'mysql:host=localhost;dbname=to_do_m2m_test';
     $username = 'root';
     $password = 'root';
@@ -13,11 +14,12 @@
         protected function tearDown()
         {
             Category::deleteAll();
+            Task::deleteAll();
         }
         function test_save()
         {
             //Arrange
-            $name = "Wash stuff";
+            $name = "Save Stuff";
             $category = new Category($name);
 
             //Act
@@ -31,8 +33,8 @@
         function test_deleteAll()
         {
             //Arrange
-            $name1 = "Wash stuff";
-            $name2 = "Clean stuff";
+            $name1 = "Delete all stuff";
+            $name2 = "Delete all more stuff";
             $category1 = new Category($name1);
             $category1->save();
             $category2 = new Category($name2);
@@ -49,8 +51,8 @@
         function test_findId()
         {
             //Arrange
-            $name1 = "Wash stuff";
-            $name2 = "Clean stuff";
+            $name1 = "find id stuff";
+            $name2 = "find more id stuff";
             $category1 = new Category($name1);
             $category1->save();
             $category2 = new Category($name2);
@@ -68,11 +70,11 @@
         function test_addTask()
         {
             //Arrange
-            $taskname = "program stuff";
+            $taskname = "Category addTask";
             $test_task = new Task($taskname);
             $test_task->save();
 
-            $category_name = "Work Stuff"; 
+            $category_name = "addTask stuff";
             $test_category = new Category($category_name);
             $test_category->save();
 
@@ -86,21 +88,21 @@
         function test_getTasks()
         {
             //Arrange
-            $taskname1 = "Work Stuff";
+            $taskname1 = "getTasks1";
             $test_task1 = new Task($taskname1);
             $test_task1->save();
 
-            $taskname2 = "Home Stuff";
+            $taskname2 = "getTasks2";
             $test_task2 = new Task($taskname2);
             $test_task2->save();
 
-            $category_name = "program stuff";
+            $category_name = "getTasks stuff";
             $test_category = new Category($category_name);
             $test_category->save();
 
             //Act
-            $test_category->addTask($test_category1);
-            $test_category->addTask($test_category2);
+            $test_category->addTask($test_task1);
+            $test_category->addTask($test_task2);
 
             //Assert
             $this->assertEquals($test_category->getTasks(), [$test_task1, $test_task2]);
@@ -109,13 +111,13 @@
         function test_delete()
         {
             //Arrange
-            $cat_name = "Work stuff";
+            $cat_name = "delete stuff";
             $test_category = new Category($cat_name);
             $test_category->save();
 
-            $task_name = "File reports";
+            $task_name = "delete";
             $test_task = new Task($task_name);
-            $test_task>save();
+            $test_task->save();
 
             //Act
             $test_category->addTask($test_task);
