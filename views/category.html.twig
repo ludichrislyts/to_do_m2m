@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <link href="../css/custom.css" rel='stylesheet' type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title>Task list</title>
+    </head>
+    <body class="withcover">
+        <div class="container">
+            {% if category is not null %}
+                <h2> Task list for {{ category.getName }}</h2>
+                <a href="/category/{{ category.getId }}/update">Edit/Delete category</a>
+                    {% if tasks is not empty %}
+                        <h2>Click on a task to edit/delete</h2>
+                        <ul>
+                            {% for task in tasks %}
+                            <li><a href="/task/{{ task.getId }}/update">{{ task.getName }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h3>No tasks</h3>
+                    {% endif %}
+
+                <h3>Add more tasks in {{ category.getName }}:</h3>
+                <form action="/category_tasks" method="post">
+                    <input type="hidden" name="category_id" id="category_id" value="{{ category.getId() }}">
+                    <label for='name'>Task Name</label>
+                    <input id='name' name='name' type='text'>
+                    <button type='submit'>Add task</button>
+                </form>
+            {% else %}
+                <a href="/">No Category to view. Go Home</a>
+            {% endif %}
+            <p><a href='/'>Home</a></p>
+        </div>
+    </body>
+</html>
