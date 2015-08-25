@@ -1,3 +1,13 @@
+<html>
+    <head>
+        <title>Your Ultimate To-Do List</title>
+        <link href="css/custom.css" rel='stylesheet' type="text/css">
+        <link href="../../css/custom.css" rel='stylesheet' type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    </head>
+    <body>
+        <div class="container">
             {% if tasks is not empty %}
                 <h3 style="font_weight:600">Click tasks to view all your tasks</h3>
                 <ul>
@@ -7,18 +17,18 @@
                 </ul>
             {% else %}
                 <h3>You have no tasks. Take a breather! </h3>
-
             {% endif %}
+            <div class="row" style="margin-left: 5px">
+                <form action='/task_added' method='post'>
+                    <label for='name'>Give yourself some work: </label>
+                    <input id='name' name='name' name='text'>
+            
+                    <button class="btn btn-default" style="padding-right:20px; padding-left:20px; background-color:#980D0D; color:black" type="submit">Add task</button>
+                </form>
+            </div>
+        </div>
 
 
             
 
 
-            <div class="row" style="margin-left: 5px">
-                <form action='/task_added' method='post'>
-                    <label for='name'>task's name</label>
-                    <input id='name' name='name' name='text'>
-
-                    <button class="btn btn-default" style="padding-right:20px; padding-left:20px; background-color:#980D0D; color:black" type="submit">Add task</button>
-                </form>
-            </div>

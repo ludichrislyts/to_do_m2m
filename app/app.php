@@ -7,8 +7,6 @@
     $app = new Silex\Application();
     $app['debug'] = true;
 
-
-
     $server = 'mysql:host=localhost;dbname=to_do_m2m';
     $username = 'root';
     $password = 'root';
@@ -122,7 +120,18 @@
         return $app['twig']->render("tasks.html.twig", array('tasks' => $tasks));
     });
 
-
+    $app->get("/task/{id}", function($id) use ($app){
+        $task = Task::findId($id);
+        $categories_in_task = $task->getCategories();
+        return $app['twig']->render("task.html.twig", array('task' => $task, 'categories' => $categories_in_task));
+    });
+    
+    $app->post("/task_added", function() use ($app){
+        $task = new Task($_POST['name']);
+        $task->save();
+        $categories = $task->getCategories();
+        return $app['twig']->render("task.html.twig", array('task' => $task, 'categories'=> $categories, 'flag' => false));
+    });
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
